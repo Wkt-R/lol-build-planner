@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_champion: MyString
+  user_role: MyString
+  ally_team: 
+  enemy_team: 
+  ai_response: MyText
+  riot_match_id: MyString
+
+two:
+  user_champion: MyString
+  user_role: MyString
+  ally_team: 
+  enemy_team: 
+  ai_response: MyText
+  riot_match_id: MyString

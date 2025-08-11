@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Matchups</h1>
+
+<div id="matchups">
+  <% @matchups.each do |matchup| %>
+    <%= render matchup %>
+    <p>
+      <%= link_to "Show this matchup", matchup %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New matchup", new_matchup_path %>

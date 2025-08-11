@@ -1,0 +1,47 @@
+<%= form_with(model: matchup) do |form| %>
+  <% if matchup.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(matchup.errors.count, "error") %> prohibited this matchup from being saved:</h2>
+
+      <ul>
+        <% matchup.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :user_champion, style: "display: block" %>
+    <%= form.text_field :user_champion %>
+  </div>
+
+  <div>
+    <%= form.label :user_role, style: "display: block" %>
+    <%= form.text_field :user_role %>
+  </div>
+
+  <div>
+    <%= form.label :ally_team, style: "display: block" %>
+    <%= form.text_field :ally_team %>
+  </div>
+
+  <div>
+    <%= form.label :enemy_team, style: "display: block" %>
+    <%= form.text_field :enemy_team %>
+  </div>
+
+  <div>
+    <%= form.label :ai_response, style: "display: block" %>
+    <%= form.text_area :ai_response %>
+  </div>
+
+  <div>
+    <%= form.label :riot_match_id, style: "display: block" %>
+    <%= form.text_field :riot_match_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

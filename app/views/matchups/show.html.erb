@@ -1,0 +1,39 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @matchup %>
+<div class="ai-plan">
+<h2>Runy</h2>
+<p><%= @matchup.runes %></p>
+
+<h2>Core Itemy</h2>
+<ul>
+  <% Array(@matchup.core_items).each do |item| %>
+    <li>
+      <strong><%= item["item"] %>:</strong> <%= item["description"] %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Sytuacyjne Itemy</h2>
+<ul>
+  <% Array(@matchup.situational_items).each do |item| %>
+    <li>
+      <strong><%= item["item"] %>:</strong> <%= item["description"] %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Playstyle</h2>
+
+<h3>Early</h3>
+<p><%= @matchup.playstyle_early %></p>
+
+<h3>Midgame</h3>
+<p><%= @matchup.playstyle_midgame %></p>
+
+<h3>Lategame</h3>
+<p><%= @matchup.playstyle_lategame %></p>
+
+<h2>Podsumowanie</h2>
+<p><%= @matchup.summary %></p>
+

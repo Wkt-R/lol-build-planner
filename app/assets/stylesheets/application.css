@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
+
+body {
+  font-family: 'Unbounded', sans-serif;
+  background: linear-gradient(#010a13, #0a1428);
+  color: #f0e6d2;
+  padding: 2rem;
+}
+
+.matchup-box {
+  background: #1e2328;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 12px #000;
+}
+
+.team-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+pre {
+  background: #0e1116;
+  padding: 1rem;
+  white-space: pre-wrap;
+  border-left: 3px solid #c89b3c;
+}

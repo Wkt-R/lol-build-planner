@@ -1,0 +1,35 @@
+<h1>Wprowadź dane do wygenerowania buildu</h1>
+
+<%= form_with url: matchups_path, method: :post do %>
+  <fieldset>
+    <legend>Lub podaj Summoner Name</legend>
+    <%= label_tag :summoner_name, "Summoner name" %>
+    <%= text_field_tag :summoner_name %>
+  </fieldset>
+
+  <hr>
+
+  <fieldset>
+    <legend>Manualny draft</legend>
+    <p><%= label_tag :user_champion %> <%= text_field_tag "matchup[user_champion]" %></p>
+    <p><%= label_tag :user_role %> <%= text_field_tag "matchup[user_role]" %></p>
+
+    <h4>Ally team:</h4>
+    <% 4.times do |i| %>
+      <p>
+        Champion: <%= text_field_tag "matchup[ally_team][#{i}][champion]" %>
+        Rola: <%= text_field_tag "matchup[ally_team][#{i}][role]" %>
+      </p>
+    <% end %>
+
+    <h4>Enemy team:</h4>
+    <% 5.times do |i| %>
+      <p>
+        Champion: <%= text_field_tag "matchup[enemy_team][#{i}][champion]" %>
+        Rola: <%= text_field_tag "matchup[enemy_team][#{i}][role]" %>
+      </p>
+    <% end %>
+  </fieldset>
+
+  <%= submit_tag "Generuj build" %>
+<% end %>
