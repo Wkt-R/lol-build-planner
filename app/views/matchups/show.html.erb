@@ -2,10 +2,11 @@
 
 <%= render @matchup %>
 <div class="ai-plan">
-<h2>Runy</h2>
+
+<h2>Runes</h2>
 <p><%= @matchup.runes %></p>
 
-<h2>Core Itemy</h2>
+<h2>Core Items</h2>
 <ul>
   <% Array(@matchup.core_items).each do |item| %>
     <li>
@@ -14,7 +15,7 @@
   <% end %>
 </ul>
 
-<h2>Sytuacyjne Itemy</h2>
+<h2>Situational items</h2>
 <ul>
   <% Array(@matchup.situational_items).each do |item| %>
     <li>
@@ -34,6 +35,6 @@
 <h3>Lategame</h3>
 <p><%= @matchup.playstyle_lategame %></p>
 
-<h2>Podsumowanie</h2>
+<h2>Summary</h2>
 <p><%= @matchup.summary %></p>
 
