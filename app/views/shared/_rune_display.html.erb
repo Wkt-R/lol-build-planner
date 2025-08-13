@@ -1,0 +1,339 @@
+<% 
+  rune_data = RuneParser.parse(runes_text)
+  primary_tree_data = RuneParser::RUNE_TREES[rune_data[:primary_tree]]
+  secondary_tree_data = RuneParser::RUNE_TREES[rune_data[:secondary_tree]]
+%>
+
+<div class="rune-panel">
+  <h3 class="rune-title">🔮 Recommended Rune Setup</h3>
+  
+  <div class="rune-trees">
+    <!-- Primary Tree -->
+    <div class="rune-tree">
+      <div class="tree-header">
+        <div class="tree-name"><%= primary_tree_data[:name] %></div>
+        <div class="tree-subtitle">Primary Tree</div>
+      </div>
+      
+      <!-- Keystone -->
+      <div class="rune-tier">
+        <div class="tier-label">Keystone</div>
+        <div class="rune-options">
+          <% primary_tree_data[:keystones].each do |keystone| %>
+            <div class="rune-slot keystone <%= 'selected' if keystone == rune_data[:keystone] %>" 
+                 data-rune="<%= keystone %>"
+                 title="<%= keystone %>">
+              <div class="rune-icon">
+                <%= RuneParser::RUNE_ICONS[keystone] || '?' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Primary Tree Tiers -->
+      <% primary_tree_data[:tiers].each_with_index do |(tier_key, tier_runes), index| %>
+        <div class="rune-tier">
+          <div class="tier-label">
+            <%= tier_key.to_s.humanize %>
+          </div>
+          <div class="rune-options">
+            <% tier_runes.each do |rune| %>
+              <div class="rune-slot <%= 'selected' if rune_data[:primary_runes].include?(rune) %>" 
+                   data-rune="<%= rune %>"
+                   title="<%= rune %>">
+                <div class="rune-icon">
+                  <%= RuneParser::RUNE_ICONS[rune] || '?' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Secondary Tree -->
+    <div class="rune-tree">
+      <div class="tree-header">
+        <div class="tree-name"><%= secondary_tree_data[:name] %></div>
+        <div class="tree-subtitle">Secondary Tree</div>
+      </div>
+
+      <!-- Secondary Tree Tiers (only show available ones) -->
+      <% secondary_tree_data[:tiers].each_with_index do |(tier_key, tier_runes), index| %>
+        <div class="rune-tier">
+          <div class="tier-label">
+            <%= tier_key.to_s.humanize %>
+          </div>
+          <div class="rune-options">
+            <% tier_runes.each do |rune| %>
+              <div class="rune-slot <%= 'selected' if rune_data[:secondary_runes].include?(rune) %>" 
+                   data-rune="<%= rune %>"
+                   title="<%= rune %>">
+                <div class="rune-icon">
+                  <%= RuneParser::RUNE_ICONS[rune] || '?' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Stat Shards -->
+  <div class="stats-section">
+    <div class="stats-title">⭐ Stat Shards</div>
+    <div class="stat-shards">
+      <div class="stat-column">
+        <div class="stat-shard selected" title="Adaptive Force">⚔️</div>
+        <div class="stat-shard" title="Attack Speed">⚡</div>
+        <div class="stat-shard" title="CDR">🔄</div>
+      </div>
+      <div class="stat-column">
+        <div class="stat-shard selected" title="Adaptive Force">⚔️</div>
+        <div class="stat-shard" title="Armor">🛡️</div>
+        <div class="stat-shard" title="Magic Resist">✨</div>
+      </div>
+      <div class="stat-column">
+        <div class="stat-shard" title="Health">💚</div>
+        <div class="stat-shard selected" title="Armor">🛡️</div>
+        <div class="stat-shard" title="Magic Resist">✨</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rune Summary -->
+  <div class="rune-description">
+    <div class="description-title">Rune Strategy</div>
+    <div class="description-text">
+      <strong><%= rune_data[:primary_tree].humanize %> + <%= rune_data[:secondary_tree].humanize %>:</strong>
+      This setup focuses on <%= describe_rune_strategy(rune_data) %>
+    </div>
+    
+    <% if rune_data[:raw_text] != rune_data[:primary_tree] %>
+      <div class="original-text" style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">
+        <strong>Original AI recommendation:</strong><br>
+        <%= rune_data[:raw_text] %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .rune-panel {
+    background: linear-gradient(135deg, #1e2328 0%, #0f1419 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(200, 155, 60, 0.2);
+    border: 2px solid #463714;
+    margin: 1rem 0;
+  }
+
+  .rune-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #c8aa3c;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(200, 170, 60, 0.3);
+  }
+
+  .rune-trees {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .rune-tree {
+    background: linear-gradient(180deg, rgba(200, 155, 60, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(200, 155, 60, 0.3);
+  }
+
+  .tree-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .tree-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #c8aa3c;
+    margin-bottom: 0.3rem;
+  }
+
+  .tree-subtitle {
+    font-size: 0.8rem;
+    color: #cdbe91;
+    opacity: 0.8;
+  }
+
+  .rune-tier {
+    margin-bottom: 1.2rem;
+  }
+
+  .tier-label {
+    font-size: 0.75rem;
+    color: #785a28;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.6rem;
+    text-align: center;
+  }
+
+  .rune-options {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .rune-slot {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .rune-slot.selected {
+    border-color: #c8aa3c;
+    box-shadow: 0 0 15px rgba(200, 170, 60, 0.4), inset 0 0 15px rgba(200, 170, 60, 0.1);
+    transform: scale(1.05);
+  }
+
+  .rune-slot.keystone {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #c8aa3c 0%, #f0e6d2 50%, #c8aa3c 100%);
+    border: 3px solid #463714;
+  }
+
+  .rune-slot.keystone.selected {
+    box-shadow: 0 0 20px rgba(200, 170, 60, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .rune-icon {
+    width: 28px;
+    height: 28px;
+    background: #c8aa3c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: #0a1428;
+  }
+
+  .rune-slot.keystone .rune-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 0.8rem;
+  }
+
+  .stats-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(200, 155, 60, 0.3);
+  }
+
+  .stats-title {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #c8aa3c;
+    margin-bottom: 1rem;
+  }
+
+  .stat-shards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .stat-shard {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #2c5364 0%, #203a43 100%);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    font-size: 0.7rem;
+  }
+
+  .stat-shard.selected {
+    border-color: #c8aa3c;
+    background: linear-gradient(135deg, #c8aa3c 0%, #f0e6d2 100%);
+    color: #0a1428;
+    transform: scale(1.05);
+  }
+
+  .rune-description {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid #c8aa3c;
+  }
+
+  .description-title {
+    font-weight: 600;
+    color: #c8aa3c;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .description-text {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #cdbe91;
+  }
+
+  @media (max-width: 768px) {
+    .rune-trees {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .rune-panel {
+      padding: 1rem;
+    }
+    
+    .stat-shards {
+      grid-template-columns: 1fr;
+    }
+    
+    .rune-options {
+      gap: 0.5rem;
+    }
+    
+    .rune-slot {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .rune-slot.keystone {
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>

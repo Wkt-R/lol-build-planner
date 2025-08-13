@@ -1,27 +1,297 @@
-@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&display=swap');
 
 body {
   font-family: 'Unbounded', sans-serif;
-  background: linear-gradient(#010a13, #0a1428);
+  background: linear-gradient(to bottom, #010a13, #0a1428);
+  background-attachment: fixed;
   color: #f0e6d2;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Global container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 2rem;
 }
 
+/* League of Legends themed elements */
 .matchup-box {
-  background: #1e2328;
+  background: linear-gradient(135deg, #1e2328 0%, #0f1419 100%);
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 12px #000;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(200, 155, 60, 0.2);
+  border: 2px solid #463714;
+  margin-bottom: 2rem;
 }
 
+/* Team sections */
 .team-section ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
+.team-section li {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  border-left: 3px solid #c89b3c;
+}
+
+/* Form styling */
+form {
+  background: linear-gradient(135deg, #1e2328 0%, #0f1419 100%);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 2px solid #463714;
+  margin-bottom: 2rem;
+}
+
+fieldset {
+  border: 1px solid rgba(200, 155, 60, 0.3);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  background: rgba(200, 155, 60, 0.05);
+}
+
+legend {
+  color: #c8aa3c;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+label {
+  display: block;
+  color: #cdbe91;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"],
+textarea, 
+select {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(200, 155, 60, 0.3);
+  border-radius: 8px;
+  padding: 0.7rem;
+  color: #f0e6d2;
+  font-family: inherit;
+  width: 100%;
+  max-width: 300px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="password"]:focus,
+textarea:focus, 
+select:focus {
+  outline: none;
+  border-color: #c8aa3c;
+  box-shadow: 0 0 10px rgba(200, 170, 60, 0.3);
+}
+
+/* Button styling */
+input[type="submit"],
+.btn {
+  background: linear-gradient(135deg, #c8aa3c 0%, #f0e6d2 100%);
+  color: #0a1428;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+input[type="submit"]:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(200, 170, 60, 0.4);
+}
+
+/* Links */
+a {
+  color: #c8aa3c;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #f0e6d2;
+  text-shadow: 0 0 5px rgba(200, 170, 60, 0.3);
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  color: #c8aa3c;
+  text-shadow: 0 0 10px rgba(200, 170, 60, 0.2);
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Code blocks and pre elements */
 pre {
   background: #0e1116;
   padding: 1rem;
   white-space: pre-wrap;
   border-left: 3px solid #c89b3c;
+  border-radius: 0 8px 8px 0;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(200, 155, 60, 0.2);
+}
+
+th {
+  background: rgba(200, 155, 60, 0.2);
+  color: #c8aa3c;
+  font-weight: 600;
+}
+
+tr:hover {
+  background: rgba(200, 155, 60, 0.1);
+}
+
+/* Flash messages */
+.notice, .alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+.notice {
+  background: rgba(34, 139, 34, 0.2);
+  border: 1px solid rgba(34, 139, 34, 0.4);
+  color: #90ee90;
+}
+
+.alert {
+  background: rgba(220, 20, 60, 0.2);
+  border: 1px solid rgba(220, 20, 60, 0.4);
+  color: #ff6b6b;
+}
+
+/* Loading states */
+.loading {
+  text-align: center;
+  color: #c8aa3c;
+  padding: 2rem;
+}
+
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(200, 170, 60, 0.3);
+  border-radius: 50%;
+  border-top-color: #c8aa3c;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  .container {
+    padding: 1rem;
+  }
+  
+  .matchup-box {
+    padding: 1rem;
+  }
+  
+  form {
+    padding: 1rem;
+  }
+  
+  fieldset {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"],
+  textarea, 
+  select {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .matchup-box {
+    margin: 0.5rem 0;
+  }
+  
+  input[type="submit"],
+  .btn {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .matchup-box {
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  a {
+    color: black;
+    text-decoration: underline;
+  }
 }
