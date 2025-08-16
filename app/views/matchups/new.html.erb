@@ -18,7 +18,7 @@
     <% 4.times do |i| %>
       <p>
         Champion: <%= text_field_tag "matchup[ally_team][#{i}][champion]" %>
-        Rola: <%= text_field_tag "matchup[ally_team][#{i}][role]" %>
+        Role: <%= text_field_tag "matchup[ally_team][#{i}][role]" %>
       </p>
     <% end %>
 
@@ -26,10 +26,10 @@
     <% 5.times do |i| %>
       <p>
         Champion: <%= text_field_tag "matchup[enemy_team][#{i}][champion]" %>
-        Rola: <%= text_field_tag "matchup[enemy_team][#{i}][role]" %>
+        Role: <%= text_field_tag "matchup[enemy_team][#{i}][role]" %>
       </p>
     <% end %>
   </fieldset>
 
-  <%= submit_tag "Generuj build" %>
+  <%= submit_tag "Generate build" %>
 <% end %>

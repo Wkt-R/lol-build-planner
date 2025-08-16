@@ -23,10 +23,12 @@ class PromptBuilder
         "core_items": [
           {"item": "Item Name", "description": "Why this item is essential for this matchup"},
           {"item": "Second Item", "description": "Explanation for second core item"}
+          {"item": "Third Item", "description": "Explanation for third core item"}
         ],
         "situational_items": [
           {"item": "Situational Item", "description": "When and why to build this item"},
           {"item": "Another Option", "description": "Alternative situational choice"}
+          {"item": "Third Option", "description": "Third situational choice"}
         ],
         "playstyle_early": "Detailed early game strategy and laning approach",
         "playstyle_mid": "Mid game teamfight and objective strategy", 
